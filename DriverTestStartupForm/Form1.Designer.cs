@@ -31,6 +31,12 @@
             this.buttonChoose = new System.Windows.Forms.Button();
             this.buttonConnect = new System.Windows.Forms.Button();
             this.labelDriverId = new System.Windows.Forms.Label();
+            this.btnGetAz = new System.Windows.Forms.Button();
+            this.btnSetAz = new System.Windows.Forms.Button();
+            this.btnGotoAz = new System.Windows.Forms.Button();
+            this.txtGetAz = new System.Windows.Forms.TextBox();
+            this.txtSetAz = new System.Windows.Forms.TextBox();
+            this.txtGotoAz = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // buttonChoose
@@ -41,7 +47,7 @@
             this.buttonChoose.TabIndex = 0;
             this.buttonChoose.Text = "Choose";
             this.buttonChoose.UseVisualStyleBackColor = true;
-            this.buttonChoose.Click += new System.EventHandler(this.buttonChoose_Click);
+            this.buttonChoose.Click += new System.EventHandler(this.ButtonChoose_Click);
             // 
             // buttonConnect
             // 
@@ -51,7 +57,7 @@
             this.buttonConnect.TabIndex = 1;
             this.buttonConnect.Text = "Connect";
             this.buttonConnect.UseVisualStyleBackColor = true;
-            this.buttonConnect.Click += new System.EventHandler(this.buttonConnect_Click);
+            this.buttonConnect.Click += new System.EventHandler(this.ButtonConnect_Click);
             // 
             // labelDriverId
             // 
@@ -64,11 +70,69 @@
             this.labelDriverId.Text = global::ASCOM.DriverStartupTestForm.Properties.Settings.Default.DriverId;
             this.labelDriverId.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // btnGetAz
+            // 
+            this.btnGetAz.Location = new System.Drawing.Point(13, 89);
+            this.btnGetAz.Name = "btnGetAz";
+            this.btnGetAz.Size = new System.Drawing.Size(75, 23);
+            this.btnGetAz.TabIndex = 3;
+            this.btnGetAz.Text = "Get Az";
+            this.btnGetAz.UseVisualStyleBackColor = true;
+            this.btnGetAz.Click += new System.EventHandler(this.btnGetAz_Click);
+            // 
+            // btnSetAz
+            // 
+            this.btnSetAz.Location = new System.Drawing.Point(13, 119);
+            this.btnSetAz.Name = "btnSetAz";
+            this.btnSetAz.Size = new System.Drawing.Size(75, 23);
+            this.btnSetAz.TabIndex = 4;
+            this.btnSetAz.Text = "Set Az";
+            this.btnSetAz.UseVisualStyleBackColor = true;
+            this.btnSetAz.Click += new System.EventHandler(this.btnSetAz_Click);
+            // 
+            // btnGotoAz
+            // 
+            this.btnGotoAz.Location = new System.Drawing.Point(13, 149);
+            this.btnGotoAz.Name = "btnGotoAz";
+            this.btnGotoAz.Size = new System.Drawing.Size(75, 23);
+            this.btnGotoAz.TabIndex = 5;
+            this.btnGotoAz.Text = "Goto Az";
+            this.btnGotoAz.UseVisualStyleBackColor = true;
+            this.btnGotoAz.Click += new System.EventHandler(this.btnGotoAz_Click);
+            // 
+            // txtGetAz
+            // 
+            this.txtGetAz.Enabled = false;
+            this.txtGetAz.Location = new System.Drawing.Point(113, 91);
+            this.txtGetAz.Name = "txtGetAz";
+            this.txtGetAz.Size = new System.Drawing.Size(100, 20);
+            this.txtGetAz.TabIndex = 6;
+            // 
+            // txtSetAz
+            // 
+            this.txtSetAz.Location = new System.Drawing.Point(113, 121);
+            this.txtSetAz.Name = "txtSetAz";
+            this.txtSetAz.Size = new System.Drawing.Size(100, 20);
+            this.txtSetAz.TabIndex = 7;
+            // 
+            // txtGotoAz
+            // 
+            this.txtGotoAz.Location = new System.Drawing.Point(113, 151);
+            this.txtGotoAz.Name = "txtGotoAz";
+            this.txtGotoAz.Size = new System.Drawing.Size(100, 20);
+            this.txtGotoAz.TabIndex = 8;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(409, 262);
+            this.Controls.Add(this.txtGotoAz);
+            this.Controls.Add(this.txtSetAz);
+            this.Controls.Add(this.txtGetAz);
+            this.Controls.Add(this.btnGotoAz);
+            this.Controls.Add(this.btnSetAz);
+            this.Controls.Add(this.btnGetAz);
             this.Controls.Add(this.labelDriverId);
             this.Controls.Add(this.buttonConnect);
             this.Controls.Add(this.buttonChoose);
@@ -76,6 +140,7 @@
             this.Text = "TEMPLATEDEVICETYPE Test";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -84,6 +149,12 @@
         private System.Windows.Forms.Button buttonChoose;
         private System.Windows.Forms.Button buttonConnect;
         private System.Windows.Forms.Label labelDriverId;
+        private System.Windows.Forms.Button btnGetAz;
+        private System.Windows.Forms.Button btnSetAz;
+        private System.Windows.Forms.Button btnGotoAz;
+        private System.Windows.Forms.TextBox txtGetAz;
+        private System.Windows.Forms.TextBox txtSetAz;
+        private System.Windows.Forms.TextBox txtGotoAz;
     }
 }
 

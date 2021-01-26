@@ -33,18 +33,21 @@
             // 
             // txtLogWindow
             // 
+            this.txtLogWindow.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtLogWindow.Location = new System.Drawing.Point(7, 10);
             this.txtLogWindow.Multiline = true;
             this.txtLogWindow.Name = "txtLogWindow";
             this.txtLogWindow.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtLogWindow.Size = new System.Drawing.Size(271, 392);
+            this.txtLogWindow.Size = new System.Drawing.Size(291, 392);
             this.txtLogWindow.TabIndex = 0;
             // 
             // logWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 414);
+            this.ClientSize = new System.Drawing.Size(310, 414);
             this.Controls.Add(this.txtLogWindow);
             this.Name = "logWindow";
             this.Text = "logWindow";

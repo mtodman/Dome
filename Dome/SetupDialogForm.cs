@@ -27,39 +27,43 @@ namespace ASCOM.MattsDome
             txtParkPos.Text = Properties.Settings.Default.ParkPosition.ToString();
             txtTicksPerRev.Text = Properties.Settings.Default.TicksPerDomeRotation.ToString();
             txtFindHomeTimeout.Text = Properties.Settings.Default.FindHomeTimeout.ToString();
+            chkLoggingWindow.Checked = Properties.Settings.Default.LogWindowEnabled;
+            chkLogToFile.Checked = Properties.Settings.Default.LogToFile;
             foreach (string str in SerialPort.GetPortNames())
             {
                 this.cmbComm.Items.Add(str);
             }
         }
 
-        private void cmdOK_Click(object sender, EventArgs e)
+        private void CmdOK_Click(object sender, EventArgs e)
         {
             Properties.Settings.Default.CommPort = cmbComm.Text;
             Properties.Settings.Default.HomeSensorPosition = Convert.ToInt16(txtHomeSensorPos.Text);
             Properties.Settings.Default.ParkPosition = Convert.ToInt16(txtParkPos.Text);
             Properties.Settings.Default.TicksPerDomeRotation = Convert.ToInt32(txtTicksPerRev.Text);
             Properties.Settings.Default.FindHomeTimeout = Convert.ToInt16(txtFindHomeTimeout.Text);
+            Properties.Settings.Default.LogWindowEnabled = chkLoggingWindow.Checked;
+            Properties.Settings.Default.LogToFile = chkLogToFile.Checked;
             if (parkPosChanged)
             {
                 dome.SetSerial(cmbComm.Text);
-                dome.set_park_pos(Convert.ToInt16(txtParkPos.Text));
+                dome.Set_park_pos(Convert.ToInt16(txtParkPos.Text));
             }
             if (ticksPerRevChanged)
             {
                 dome.SetSerial(cmbComm.Text);
-                dome.set_ticks_per_rev(Convert.ToInt16(txtTicksPerRev.Text));
+                dome.Set_ticks_per_rev(Convert.ToInt16(txtTicksPerRev.Text));
             }
             if (sensorPosChanged)
             {
                 dome.SetSerial(cmbComm.Text);
-                dome.set_home_pos(Convert.ToInt16(txtHomeSensorPos.Text));
+                dome.Set_home_pos(Convert.ToInt16(txtHomeSensorPos.Text));
             }
             dome.Dispose();
             Close();
         }
 
-        private void cmdCancel_Click(object sender, EventArgs e)
+        private void CmdCancel_Click(object sender, EventArgs e)
         {
             dome.Dispose();
             Close();
@@ -82,7 +86,7 @@ namespace ASCOM.MattsDome
             }
         }
 
-        private void cmdTest_Click(object sender, EventArgs e)
+        private void CmdTest_Click(object sender, EventArgs e)
         {
             ArduinoComms m_serial = new ArduinoComms(this.cmbComm.Text);
             for (int i = 0; i < 2; i++)
@@ -113,51 +117,51 @@ namespace ASCOM.MattsDome
 
         }
 
-        private void btnHome_Click(object sender, EventArgs e)
+        private void BtnHome_Click(object sender, EventArgs e)
         {
             if (dome.Slaved) return;
             dome.SetSerial(cmbComm.Text);
             dome.FindHome();
         }
 
-        private void btnPark_Click(object sender, EventArgs e)
+        private void BtnPark_Click(object sender, EventArgs e)
         {
             if (dome.Slaved) return;
             dome.SetSerial(cmbComm.Text);
             dome.Park();
         }
 
-        private void btnConnect_Click(object sender, EventArgs e)
+        private void BtnConnect_Click(object sender, EventArgs e)
         {
             dome.Connected = true;
         }
 
-        private void btnCCW_MouseDown(object sender, MouseEventArgs e)
+        private void BtnCCW_MouseDown(object sender, MouseEventArgs e)
         {
             if (dome.Slaved) return;
             dome.SetSerial(cmbComm.Text);
-            dome.slew_CCW();
+            dome.Slew_CCW();
         }
 
-        private void btnCCW_MouseUp(object sender, MouseEventArgs e)
+        private void BtnCCW_MouseUp(object sender, MouseEventArgs e)
         {
             if (dome.Slaved) return;
             dome.SetSerial(cmbComm.Text);
-            dome.slew_Stop();
+            dome.Slew_Stop();
         }
 
-        private void btnCW_MouseDown(object sender, MouseEventArgs e)
+        private void BtnCW_MouseDown(object sender, MouseEventArgs e)
         {
             if (dome.Slaved) return;
             dome.SetSerial(cmbComm.Text);
-            dome.slew_CW();
+            dome.Slew_CW();
         }
 
-        private void btnCW_MouseUp(object sender, MouseEventArgs e)
+        private void BtnCW_MouseUp(object sender, MouseEventArgs e)
         {
             if (dome.Slaved) return;
             dome.SetSerial(cmbComm.Text);
-            dome.slew_Stop();
+            dome.Slew_Stop();
         }
 
         private void txtHomeSensorPos_Leave(object sender, EventArgs e)
@@ -177,7 +181,7 @@ namespace ASCOM.MattsDome
 
         private void btnGetAzimuth_Click(object sender, EventArgs e)
         {
-            txtAzimuth.Text = dome.getAzimuth().ToString();
+            txtAzimuth.Text = dome.GetAzimuth().ToString();
         }
 
 
@@ -204,8 +208,14 @@ namespace ASCOM.MattsDome
             if (dome.Slaved) return;
             dome.SetSerial(cmbComm.Text);
             dome.SyncToAzimuth(Convert.ToDouble(txtSetAzimuth.Text));
-            txtAzimuth.Text = dome.getAzimuth().ToString();
+            txtAzimuth.Text = dome.GetAzimuth().ToString();
         }
 
+        private void chkLCDBacklight_CheckedChanged(object sender, EventArgs e)
+        {
+            if (dome.Slaved) return;
+            dome.SetSerial(cmbComm.Text);
+            dome.SetLCD(chkLCDBacklight.Checked);
+        }
     }
 }

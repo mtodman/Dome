@@ -12,7 +12,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("The ASCOM Initiative")]
 [assembly: AssemblyProduct("ASCOM Dome driver for MattsDome")]
-[assembly: AssemblyCopyright("Copyright © 2012 The ASCOM Initiative")]
+[assembly: AssemblyCopyright("Copyright © 2018 The ASCOM Initiative")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

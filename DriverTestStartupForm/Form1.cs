@@ -22,13 +22,13 @@ namespace ASCOM.DriverStartupTestForm
             Properties.Settings.Default.Save();
         }
 
-        private void buttonChoose_Click(object sender, EventArgs e)
+        private void ButtonChoose_Click(object sender, EventArgs e)
         {
             Properties.Settings.Default.DriverId = ASCOM.DriverAccess.Dome.Choose(Properties.Settings.Default.DriverId);
             SetUIState();
         }
 
-        private void buttonConnect_Click(object sender, EventArgs e)
+        private void ButtonConnect_Click(object sender, EventArgs e)
         {
             if (IsConnected)
             {
@@ -55,6 +55,21 @@ namespace ASCOM.DriverStartupTestForm
             {
                 return ((this.driver != null) && (driver.Connected == true));
             }
+        }
+
+        private void btnGetAz_Click(object sender, EventArgs e)
+        {
+            txtGetAz.Text =  driver.Azimuth.ToString();
+        }
+
+        private void btnSetAz_Click(object sender, EventArgs e)
+        {
+            driver.SyncToAzimuth(Convert.ToDouble(txtSetAz.Text));
+        }
+
+        private void btnGotoAz_Click(object sender, EventArgs e)
+        {
+            driver.SlewToAzimuth(Convert.ToDouble(txtGotoAz.Text));
         }
     }
 }

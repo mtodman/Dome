@@ -6,16 +6,28 @@
       <Value Profile="(Default)">COM1</Value>
     </Setting>
     <Setting Name="HomeSensorPosition" Type="System.Int16" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">180</Value>
     </Setting>
     <Setting Name="ParkPosition" Type="System.Int16" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">180</Value>
     </Setting>
     <Setting Name="TicksPerDomeRotation" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">454</Value>
     </Setting>
     <Setting Name="FindHomeTimeout" Type="System.Int16" Scope="User">
       <Value Profile="(Default)">60</Value>
+    </Setting>
+    <Setting Name="LogWindowEnabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="LogToFile" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="EnableLCDBacklight" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="LogLevel" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
     </Setting>
   </Settings>
 </SettingsFile>
