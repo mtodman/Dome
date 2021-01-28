@@ -108,8 +108,8 @@ namespace ASCOM.MattsDome
         static readonly object locker = new object();
         delegate void SetTextCallback(string text);
         delegate void CloseDelegate();
-        StreamWriter w;
-        private ASCOM.Utilities.TraceLogger trace;
+        //StreamWriter w;
+        public ASCOM.Utilities.TraceLogger trace;
         private string traceSource = "Matt's Dome";
 
 
@@ -123,6 +123,7 @@ namespace ASCOM.MattsDome
             Get_values();
             TicksPerDegree = Properties.Settings.Default.TicksPerDomeRotation / 360;
             log_window_enabled = Properties.Settings.Default.LogWindowEnabled;
+            trace = new ASCOM.Utilities.TraceLogger();
         }
 
         #region ASCOM Registration
@@ -282,10 +283,6 @@ namespace ASCOM.MattsDome
                 {
                     oThread = new Thread(new ThreadStart(ShowCounterForm));
                 }
-                //if(Properties.Settings.Default.LogToFile)
-                //{
-                //    w = File.AppendText("log.txt");
-                //}
                 
                 if (value == IsConnected)
                     return;
@@ -308,7 +305,6 @@ namespace ASCOM.MattsDome
                                 trace = new ASCOM.Utilities.TraceLogger();
                                 trace.Enabled = true;
                                 trace.LogMessage(traceSource, "Log Started");
-                                w = File.AppendText("c:\\log.txt");
                             }
 
                             break;
@@ -338,9 +334,10 @@ namespace ASCOM.MattsDome
                     {
                         oThread.Abort();
                         L.Invoke(new CloseDelegate(L.Close)); //Required because we are closing the logwindow form from another thread
-                        if(w != null)
+                        if (trace.Enabled)
                         {
-                            w.Close();
+                            trace.Enabled = false;
+                            trace.Dispose();
                         }
                     }
                 }
@@ -385,8 +382,9 @@ namespace ASCOM.MattsDome
         /// </summary>
         public void Slew_CW()
         {
-            WriteToLog(DateTime.Now.ToString() + ": Received from Application (client): Start Manual CW slew", 2);
+            WriteToLog(DateTime.Now.ToString() + ": Application >> Driver: Start Manual CW slew", 2);
             int response = serial_port.SendCommand(ARD_SLEW_START_CW, 0);
+            WriteToLog(DateTime.Now.ToString() + ": Driver >> Arduino: ARD_SLEW_START_CW", 2);
             if (response != 33)
             {
                 WriteToLog(DateTime.Now.ToString() + ": Invalid response received from the Arduino", 2);
@@ -394,7 +392,7 @@ namespace ASCOM.MattsDome
             }
             else
             {
-                WriteToLog(DateTime.Now.ToString() + ": Ok response received from the Arduino", 2);
+                WriteToLog(DateTime.Now.ToString() + ": Arduino >> Driver: Ok (33) response received", 2);
             }
         }
 
@@ -403,8 +401,9 @@ namespace ASCOM.MattsDome
         /// </summary>
         public void Slew_CCW()
         {
-            WriteToLog(DateTime.Now.ToString() + ": Received from Application (client): Start Manual CCW slew", 2);
+            WriteToLog(DateTime.Now.ToString() + ": Application >> Driver: Start Manual CCW slew", 2);
             int response = serial_port.SendCommand(ARD_SLEW_START_CCW, 0);
+            WriteToLog(DateTime.Now.ToString() + ": Driver >> Arduino: ARD_SLEW_START_CCW", 2);
             if (response != 33)
             {
                 WriteToLog(DateTime.Now.ToString() + ": Invalid response received from the Arduino", 2);
@@ -412,7 +411,7 @@ namespace ASCOM.MattsDome
             }
             else
             {
-                WriteToLog(DateTime.Now.ToString() + ": Ok response received from the Arduino", 2);
+                WriteToLog(DateTime.Now.ToString() + ": Arduino >> Driver: Ok (33) response received", 2);
             }
         }
 
@@ -421,8 +420,9 @@ namespace ASCOM.MattsDome
         /// </summary>
         public void Slew_Stop()
         {
-            WriteToLog(DateTime.Now.ToString() + ": Received from Application (client): Stop slew", 2);
+            WriteToLog(DateTime.Now.ToString() + ": Application >> Driver: Stop slew", 2);
             int response = serial_port.SendCommand(ARD_SLEW_STOP, 0);
+            WriteToLog(DateTime.Now.ToString() + ": Driver >> Arduino: ARD_SLEW_STOP", 2);
             if (response != 33)
             {
                 WriteToLog(DateTime.Now.ToString() + ": Invalid response received from the Arduino", 2);
@@ -430,28 +430,35 @@ namespace ASCOM.MattsDome
             }
             else
             {
-                WriteToLog(DateTime.Now.ToString() + ": Ok response received from the Arduino", 2);
+                WriteToLog(DateTime.Now.ToString() + ": Arduino >> Driver: Ok (33) response received", 2);
             }
         }
 
         public void Set_home_pos(int angle)
         {
-            WriteToLog(DateTime.Now.ToString() + ": Rewceived from Application: Set Home Position to " + angle.ToString() + " degrees.", 2);
+            WriteToLog(DateTime.Now.ToString() + ": Application >> Driver: Set Home Position to " + angle.ToString() + " degrees.", 2);
             int response = serial_port.SendCommand(ARD_SET_HOME_POS, angle);
-            if (response != angle) throw new ASCOM.InvalidOperationException("Invalid response received from the Arduino");
+            WriteToLog(DateTime.Now.ToString() + ": Driver >> Arduino: ARD_SET_HOME_POS to " + angle.ToString(), 2);
+            if (response != angle) { throw new ASCOM.InvalidOperationException("Invalid response received from the Arduino"); }
+            else { WriteToLog(DateTime.Now.ToString() + ": Arduino >> Driver: value returned = " + angle.ToString(), 2); }
         }
 
         public void Set_ticks_per_rev(int ticks)
         {
+            WriteToLog(DateTime.Now.ToString() + ": Application >> Driver: Set ticks/rev to " + ticks.ToString(), 2);
             int response = serial_port.SendCommand(ARD_SET_TICKS_PER_REV, ticks);
-            if (response != ticks) throw new ASCOM.InvalidOperationException("Invalid response received from the Arduino");
+            WriteToLog(DateTime.Now.ToString() + ": Driver >> Arduino: ARD_SET_TICKS_PER_REV to " + ticks.ToString(), 2);
+            if (response != ticks) { throw new ASCOM.InvalidOperationException("Invalid response received from the Arduino"); }
+            else { WriteToLog(DateTime.Now.ToString() + ": Arduino >> Driver: value returned = " + ticks.ToString(), 2); }
         }
 
         public void Set_park_pos(int degrees)
         {
-            WriteToLog(DateTime.Now.ToString() + ": Received from Application: Set Park Position to " + degrees.ToString() + " degrees.", 2);
+            WriteToLog(DateTime.Now.ToString() + ": Application >> Driver: Set Park Position to " + degrees.ToString() + " degrees.", 2);
             int response = serial_port.SendCommand(ARD_SET_PARK_POS, degrees);
-            if (response != degrees) throw new ASCOM.InvalidOperationException("Invalid response received from the Arduino");
+            WriteToLog(DateTime.Now.ToString() + ": Driver >> Arduino: ARD_SET_PARK_POS to " + degrees.ToString() + " degrees", 2);
+            if (response != degrees) { throw new ASCOM.InvalidOperationException("Invalid response received from the Arduino"); }
+            else { WriteToLog(DateTime.Now.ToString() + ": Arduino >> Driver: value returned = " + degrees.ToString(), 2); }
         }
 
         public void Get_values()
@@ -463,9 +470,14 @@ namespace ASCOM.MattsDome
 
         public int GetAzimuth()
         {
-            WriteToLog(DateTime.Now.ToString() + ": From Application: Get Azimuth ", 2);
+            WriteToLog(DateTime.Now.ToString() + ": Application >> Driver: Get Current Azimuth ", 2);
             int az = serial_port.SendCommand(ARD_GET_AZIMUTH, 0);
-            WriteToLog(DateTime.Now.ToString() + ": From Arduino: Azimuth = " + az.ToString() + " degrees.", 2);
+            WriteToLog(DateTime.Now.ToString() + ": Driver >> Arduino: ARD_GET_AZIMUTH", 2);
+            if (az < 0 || az >= 361) {
+                WriteToLog(DateTime.Now.ToString() + ": Invalid response recieved from the Arduino: " + az.ToString(), 2);
+                throw new ASCOM.InvalidOperationException("Invalid response received from the Arduino. az = " + az.ToString() + " degrees"); 
+            }
+            else { WriteToLog(DateTime.Now.ToString() + ": Arduino >> Driver: value returned = " + az.ToString() + " degrees.", 2); }
             return az;
         }
 
@@ -572,18 +584,18 @@ namespace ASCOM.MattsDome
 
         public void AbortSlew()
         {
-            WriteToLog(DateTime.Now.ToString() + ": Received from Application (client): AbortSlew", 2);
+            WriteToLog(DateTime.Now.ToString() + ": Application >> Driver: AbortSlew", 2);
             if (!Slewing) return;
             if (Slaved) slaved = false;
             int response = serial_port.SendCommand(ARD_SLEW_ABORT, 0);
-            WriteToLog(DateTime.Now.ToString() + ": From driver to Arduino: ARD_SLEW_ABORT", 2);
+            WriteToLog(DateTime.Now.ToString() + ": Driver >> Arduino: ARD_SLEW_ABORT", 2);
             if (response != ARD_OK)
             {
                 WriteToLog(DateTime.Now.ToString() + ": Invalid response recieved from the Arduino: " + response.ToString(), 2);
                 throw new ASCOM.InvalidValueException("AbortSlew command resulted in an invalid response from the Arduino board");
             } else
             {
-                WriteToLog(DateTime.Now.ToString() + ": OK signal recieved from the Arduino: " + response.ToString(), 2);
+                WriteToLog(DateTime.Now.ToString() + ": Arduino >> Driver: Ok (33) response received" + response.ToString(), 2);
             }
         }
 
@@ -596,7 +608,7 @@ namespace ASCOM.MattsDome
         {
             get
             {
-                WriteToLog(DateTime.Now.ToString() + ": Received from Application (client): AtHome?", 2);
+                WriteToLog(DateTime.Now.ToString() + ": Application >> Driver: AtHome?", 2);
                 int response = serial_port.SendCommand(ARD_IS_HOME, 0);
                 WriteToLog(DateTime.Now.ToString() + ": From driver to Arduino: ARD_IS_HOME", 2);
                 if (response == ARD_OK)
@@ -621,9 +633,15 @@ namespace ASCOM.MattsDome
         public double Azimuth
         {
             get {
-                WriteToLog(DateTime.Now.ToString() + ": From Application: Get Azimuth ", 2);
+                WriteToLog(DateTime.Now.ToString() + ": Application >> Driver: Get Azimuth ", 2);
                 azimuth = serial_port.SendCommand(ARD_GET_AZIMUTH, 0);
-                WriteToLog(DateTime.Now.ToString() + ": From Arduino: Azimuth = " + azimuth.ToString() + " degrees.", 2);
+                WriteToLog(DateTime.Now.ToString() + ": Driver >> Arduino: ARD_GET_AZIMUTH", 2);
+                if (azimuth < 0 || azimuth >= 361)
+                {
+                    WriteToLog(DateTime.Now.ToString() + ": Invalid response recieved from the Arduino: " + azimuth.ToString(), 2);
+                    throw new ASCOM.InvalidOperationException("Invalid response received from the Arduino. azimuth = " + azimuth.ToString() + " degrees");
+                }
+                else { WriteToLog(DateTime.Now.ToString() + ": Arduino >> Driver: Azimuth = " + azimuth.ToString() + " degrees.", 2); }
                 return azimuth; }
         }
 
@@ -631,7 +649,7 @@ namespace ASCOM.MattsDome
         {
             get
             {
-                WriteToLog(DateTime.Now.ToString() + ": From Application to driver: CanFindHome? ", 2);
+                WriteToLog(DateTime.Now.ToString() + ": Application >> Driver: CanFindHome? ", 2);
                 WriteToLog(DateTime.Now.ToString() + ": From Driver to application: CanFindHome = True ", 2);
                 return true;
             }
@@ -641,7 +659,7 @@ namespace ASCOM.MattsDome
         {
             get
             {
-                WriteToLog(DateTime.Now.ToString() + ": From Application to driver: CanPark? ", 2);
+                WriteToLog(DateTime.Now.ToString() + ": Application >> Driver: CanPark? ", 2);
                 WriteToLog(DateTime.Now.ToString() + ": From Driver to application: CanPark = True ", 2);
                 return true;
             }
@@ -651,7 +669,7 @@ namespace ASCOM.MattsDome
         {
             get
             {
-                WriteToLog(DateTime.Now.ToString() + ": From Application to driver: CanSetAltitude? ", 2);
+                WriteToLog(DateTime.Now.ToString() + ": Application >> Driver: CanSetAltitude? ", 2);
                 WriteToLog(DateTime.Now.ToString() + ": From Driver to application: CanSetAltitude = False ", 2);
                 return false;
             }
@@ -661,7 +679,7 @@ namespace ASCOM.MattsDome
         {
             get
             {
-                WriteToLog(DateTime.Now.ToString() + ": From Application to driver: CanSetAzimuth? ", 2);
+                WriteToLog(DateTime.Now.ToString() + ": Application >> Driver: CanSetAzimuth? ", 2);
                 WriteToLog(DateTime.Now.ToString() + ": From Driver to application: CanSetAzimuth = True ", 2);
                 return true;
             }
@@ -671,7 +689,7 @@ namespace ASCOM.MattsDome
         {
             get
             {
-                WriteToLog(DateTime.Now.ToString() + ": From Application to driver: CanSetPark? ", 2);
+                WriteToLog(DateTime.Now.ToString() + ": Application >> Driver: CanSetPark? ", 2);
                 WriteToLog(DateTime.Now.ToString() + ": From Driver to application: CanSetPark = True ", 2);
                 return true;
             }
@@ -681,7 +699,7 @@ namespace ASCOM.MattsDome
         {
             get
             {
-                WriteToLog(DateTime.Now.ToString() + ": From Application to driver: CanSetShutter? ", 2);
+                WriteToLog(DateTime.Now.ToString() + ": Application >> Driver: CanSetShutter? ", 2);
                 WriteToLog(DateTime.Now.ToString() + ": From Driver to application: CanSetShutter = False ", 2);
                 return false;
             }
@@ -691,7 +709,7 @@ namespace ASCOM.MattsDome
         {
             get
             {
-                WriteToLog(DateTime.Now.ToString() + ": From Application to driver: CanSlave? ", 2);
+                WriteToLog(DateTime.Now.ToString() + ": Application >> Driver: CanSlave? ", 2);
                 WriteToLog(DateTime.Now.ToString() + ": From Driver to application: CanSlave = False ", 2);
                 return false;
             }
@@ -701,7 +719,7 @@ namespace ASCOM.MattsDome
         {
             get
             {
-                WriteToLog(DateTime.Now.ToString() + ": From Application to driver: CanSyncAzimuth? ", 2);
+                WriteToLog(DateTime.Now.ToString() + ": Application >> Driver: CanSyncAzimuth? ", 2);
                 WriteToLog(DateTime.Now.ToString() + ": From Driver to application: CanSyncAzimuth = True ", 2);
                 return true;
             }
@@ -714,7 +732,7 @@ namespace ASCOM.MattsDome
 
         public void FindHome()
         {
-            WriteToLog(DateTime.Now.ToString() + ": Received from Application (client): FindHome", 2);
+            WriteToLog(DateTime.Now.ToString() + ": Application >> Driver: FindHome", 2);
             if (Slaved) throw new ASCOM.SlavedException(); 
             int response = serial_port.SendCommand(ARD_FIND_HOME, 0);
             WriteToLog(DateTime.Now.ToString() + ": From driver to Arduino: ARD_FIND_HOME", 2);
@@ -818,7 +836,7 @@ namespace ASCOM.MattsDome
 
         public void SlewToAzimuth(double TargetAzimuth)
         {
-            WriteToLog(DateTime.Now.ToString() + ": Received from Application (client): SlewToAzimuth " + TargetAzimuth.ToString(), 1);
+            WriteToLog(DateTime.Now.ToString() + ": Application >> Driver: SlewToAzimuth " + TargetAzimuth.ToString(), 1);
             WriteToLog(DateTime.Now.ToString() + ": (Current Dome Azimuth = " + Azimuth.ToString() + ")", 1);
             double CurrentAzimuth = Azimuth;
             if (!IsConnected) return;
@@ -843,20 +861,20 @@ namespace ASCOM.MattsDome
                         {
                             //Clockwise Command
                             response = serial_port.SendCommand(ARD_SLEW_TO_TARGET_CW, (short)TargetAzimuth);
-                            WriteToLog(DateTime.Now.ToString() + ": From driver to Arduino: ARD_SLEW_TO_TARGET_CW " + ((short)TargetAzimuth).ToString(), 1);
+                            WriteToLog(DateTime.Now.ToString() + ": Driver >> Arduino: ARD_SLEW_TO_TARGET_CW " + ((short)TargetAzimuth).ToString(), 1);
                         }
                         else
                         {
                             //Counter Clockwise Command
                             response = serial_port.SendCommand(ARD_SLEW_TO_TARGET_CCW, (short)TargetAzimuth);
-                            WriteToLog(DateTime.Now.ToString() + ": From driver to Arduino: ARD_SLEW_TO_TARGET_CCW " + ((short)TargetAzimuth).ToString(), 1);
+                            WriteToLog(DateTime.Now.ToString() + ": Driver >> Arduino: ARD_SLEW_TO_TARGET_CCW " + ((short)TargetAzimuth).ToString(), 1);
                         }
                     }
                     else
                     {
                         // //Clockwise Command
                         response = serial_port.SendCommand(ARD_SLEW_TO_TARGET_CW, (short)TargetAzimuth);
-                        WriteToLog(DateTime.Now.ToString() + ": From driver to Arduino: ARD_SLEW_TO_TARGET_CW " + ((short)TargetAzimuth).ToString(), 1);
+                        WriteToLog(DateTime.Now.ToString() + ": Driver >> Arduino: ARD_SLEW_TO_TARGET_CW " + ((short)TargetAzimuth).ToString(), 1);
                     }
                 }
                 else //Current dome azimuth position < 180 degrees
@@ -866,19 +884,19 @@ namespace ASCOM.MattsDome
                     {
                         // //Clockwise Command
                         response = serial_port.SendCommand(ARD_SLEW_TO_TARGET_CW, (short)TargetAzimuth);
-                        WriteToLog(DateTime.Now.ToString() + ": From driver to Arduino: ARD_SLEW_TO_TARGET_CW " + ((short)TargetAzimuth).ToString(), 1);
+                        WriteToLog(DateTime.Now.ToString() + ": Driver >> Arduino: ARD_SLEW_TO_TARGET_CW " + ((short)TargetAzimuth).ToString(), 1);
                     }
                     else if (delta <= 0)
                     {
                         // CCW Command
                         response = serial_port.SendCommand(ARD_SLEW_TO_TARGET_CCW, (short)TargetAzimuth);
-                        WriteToLog(DateTime.Now.ToString() + ": From driver to Arduino: ARD_SLEW_TO_TARGET_CCW " + ((short)TargetAzimuth).ToString(), 1);
+                        WriteToLog(DateTime.Now.ToString() + ": Driver >> Arduino: ARD_SLEW_TO_TARGET_CCW " + ((short)TargetAzimuth).ToString(), 1);
                     }
                     else
                     {
                         // CCW Command (changed from CW on 20130727)
                         response = serial_port.SendCommand(ARD_SLEW_TO_TARGET_CCW, (short)TargetAzimuth);
-                        WriteToLog(DateTime.Now.ToString() + ": From driver to Arduino: ARD_SLEW_TO_TARGET_CCW " + ((short)TargetAzimuth).ToString(), 1);
+                        WriteToLog(DateTime.Now.ToString() + ": Driver >> Arduino: ARD_SLEW_TO_TARGET_CCW " + ((short)TargetAzimuth).ToString(), 1);
                     }
                 }
                 if (response != ARD_OK)
@@ -888,7 +906,7 @@ namespace ASCOM.MattsDome
                 }
                 else
                 {
-                    WriteToLog(DateTime.Now.ToString() + ": OK signal recieved from the Arduino: " + response.ToString(), 1);
+                    WriteToLog(DateTime.Now.ToString() + ": Atduino >> Driver: OK (33) signal recieved: " + response.ToString(), 1);
                 }
             }
         }
