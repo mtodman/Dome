@@ -37,6 +37,8 @@ namespace ASCOM.MattsDome
             this.cmbComm = new System.Windows.Forms.ComboBox();
             this.GroupBox2 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.numUDLoggingLevel = new System.Windows.Forms.NumericUpDown();
+            this.chkLCDBacklight = new System.Windows.Forms.CheckBox();
             this.chkLogToFile = new System.Windows.Forms.CheckBox();
             this.chkLoggingWindow = new System.Windows.Forms.CheckBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -61,23 +63,20 @@ namespace ASCOM.MattsDome
             this.btnAbortSlew = new System.Windows.Forms.Button();
             this.btnSlewToTarget = new System.Windows.Forms.Button();
             this.txtTargetAzimuth = new System.Windows.Forms.TextBox();
-            this.numUDLoggingLevel = new System.Windows.Forms.NumericUpDown();
-            this.chkLCDBacklight = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.picASCOM)).BeginInit();
             this.frmComm.SuspendLayout();
             this.GroupBox2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numUDLoggingLevel)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // cmdOK
             // 
             this.cmdOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cmdOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.cmdOK.Location = new System.Drawing.Point(16, 643);
-            this.cmdOK.Margin = new System.Windows.Forms.Padding(4);
+            this.cmdOK.Location = new System.Drawing.Point(12, 522);
             this.cmdOK.Name = "cmdOK";
-            this.cmdOK.Size = new System.Drawing.Size(79, 30);
+            this.cmdOK.Size = new System.Drawing.Size(59, 24);
             this.cmdOK.TabIndex = 0;
             this.cmdOK.Text = "OK";
             this.cmdOK.UseVisualStyleBackColor = true;
@@ -87,10 +86,9 @@ namespace ASCOM.MattsDome
             // 
             this.cmdCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cmdCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cmdCancel.Location = new System.Drawing.Point(189, 642);
-            this.cmdCancel.Margin = new System.Windows.Forms.Padding(4);
+            this.cmdCancel.Location = new System.Drawing.Point(142, 522);
             this.cmdCancel.Name = "cmdCancel";
-            this.cmdCancel.Size = new System.Drawing.Size(79, 31);
+            this.cmdCancel.Size = new System.Drawing.Size(59, 25);
             this.cmdCancel.TabIndex = 1;
             this.cmdCancel.Text = "Cancel";
             this.cmdCancel.UseVisualStyleBackColor = true;
@@ -100,8 +98,7 @@ namespace ASCOM.MattsDome
             // 
             this.picASCOM.Cursor = System.Windows.Forms.Cursors.Hand;
             this.picASCOM.Image = global::ASCOM.MattsDome.Properties.Resources.ASCOM;
-            this.picASCOM.Location = new System.Drawing.Point(325, 32);
-            this.picASCOM.Margin = new System.Windows.Forms.Padding(4);
+            this.picASCOM.Location = new System.Drawing.Point(244, 26);
             this.picASCOM.Name = "picASCOM";
             this.picASCOM.Size = new System.Drawing.Size(48, 56);
             this.picASCOM.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -113,11 +110,9 @@ namespace ASCOM.MattsDome
             // frmComm
             // 
             this.frmComm.Controls.Add(this.cmbComm);
-            this.frmComm.Location = new System.Drawing.Point(16, 11);
-            this.frmComm.Margin = new System.Windows.Forms.Padding(4);
+            this.frmComm.Location = new System.Drawing.Point(12, 9);
             this.frmComm.Name = "frmComm";
-            this.frmComm.Padding = new System.Windows.Forms.Padding(4);
-            this.frmComm.Size = new System.Drawing.Size(236, 90);
+            this.frmComm.Size = new System.Drawing.Size(177, 73);
             this.frmComm.TabIndex = 56;
             this.frmComm.TabStop = false;
             this.frmComm.Text = "Comm Port";
@@ -125,10 +120,9 @@ namespace ASCOM.MattsDome
             // cmbComm
             // 
             this.cmbComm.FormattingEnabled = true;
-            this.cmbComm.Location = new System.Drawing.Point(9, 34);
-            this.cmbComm.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbComm.Location = new System.Drawing.Point(7, 28);
             this.cmbComm.Name = "cmbComm";
-            this.cmbComm.Size = new System.Drawing.Size(160, 24);
+            this.cmbComm.Size = new System.Drawing.Size(121, 21);
             this.cmbComm.TabIndex = 0;
             this.cmbComm.Text = "Choose a Com Port";
             // 
@@ -147,11 +141,9 @@ namespace ASCOM.MattsDome
             this.GroupBox2.Controls.Add(this.txtFindHomeTimeout);
             this.GroupBox2.Controls.Add(this.txtTicksPerRev);
             this.GroupBox2.Controls.Add(this.txtParkPos);
-            this.GroupBox2.Location = new System.Drawing.Point(13, 108);
-            this.GroupBox2.Margin = new System.Windows.Forms.Padding(4);
+            this.GroupBox2.Location = new System.Drawing.Point(10, 88);
             this.GroupBox2.Name = "GroupBox2";
-            this.GroupBox2.Padding = new System.Windows.Forms.Padding(4);
-            this.GroupBox2.Size = new System.Drawing.Size(383, 285);
+            this.GroupBox2.Size = new System.Drawing.Size(287, 232);
             this.GroupBox2.TabIndex = 58;
             this.GroupBox2.TabStop = false;
             this.GroupBox2.Text = "Misc Settings";
@@ -159,259 +151,18 @@ namespace ASCOM.MattsDome
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(56, 221);
+            this.label1.Location = new System.Drawing.Point(42, 180);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(97, 17);
+            this.label1.Size = new System.Drawing.Size(74, 13);
             this.label1.TabIndex = 19;
             this.label1.Text = "Logging Level";
-            // 
-            // chkLogToFile
-            // 
-            this.chkLogToFile.AutoSize = true;
-            this.chkLogToFile.Location = new System.Drawing.Point(12, 192);
-            this.chkLogToFile.Margin = new System.Windows.Forms.Padding(4);
-            this.chkLogToFile.Name = "chkLogToFile";
-            this.chkLogToFile.Size = new System.Drawing.Size(101, 21);
-            this.chkLogToFile.TabIndex = 16;
-            this.chkLogToFile.Text = "Log To File";
-            this.chkLogToFile.UseVisualStyleBackColor = true;
-            // 
-            // chkLoggingWindow
-            // 
-            this.chkLoggingWindow.AutoSize = true;
-            this.chkLoggingWindow.Location = new System.Drawing.Point(12, 164);
-            this.chkLoggingWindow.Margin = new System.Windows.Forms.Padding(4);
-            this.chkLoggingWindow.Name = "chkLoggingWindow";
-            this.chkLoggingWindow.Size = new System.Drawing.Size(182, 21);
-            this.chkLoggingWindow.TabIndex = 15;
-            this.chkLoggingWindow.Text = "Enable Logging Window";
-            this.chkLoggingWindow.UseVisualStyleBackColor = true;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(8, 34);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(148, 17);
-            this.label7.TabIndex = 13;
-            this.label7.Text = "Home Sensor Position";
-            // 
-            // txtHomeSensorPos
-            // 
-            this.txtHomeSensorPos.Location = new System.Drawing.Point(203, 31);
-            this.txtHomeSensorPos.Margin = new System.Windows.Forms.Padding(4);
-            this.txtHomeSensorPos.Name = "txtHomeSensorPos";
-            this.txtHomeSensorPos.Size = new System.Drawing.Size(93, 22);
-            this.txtHomeSensorPos.TabIndex = 12;
-            this.txtHomeSensorPos.Leave += new System.EventHandler(this.txtHomeSensorPos_Leave);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(8, 65);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(91, 17);
-            this.label6.TabIndex = 11;
-            this.label6.Text = "Park Position";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(8, 98);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(178, 17);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "Ticks per Dome Revolution";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(8, 130);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(169, 17);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "Find Home timeout (secs)";
-            // 
-            // txtFindHomeTimeout
-            // 
-            this.txtFindHomeTimeout.Location = new System.Drawing.Point(203, 127);
-            this.txtFindHomeTimeout.Margin = new System.Windows.Forms.Padding(4);
-            this.txtFindHomeTimeout.Name = "txtFindHomeTimeout";
-            this.txtFindHomeTimeout.Size = new System.Drawing.Size(93, 22);
-            this.txtFindHomeTimeout.TabIndex = 5;
-            // 
-            // txtTicksPerRev
-            // 
-            this.txtTicksPerRev.Location = new System.Drawing.Point(203, 95);
-            this.txtTicksPerRev.Margin = new System.Windows.Forms.Padding(4);
-            this.txtTicksPerRev.Name = "txtTicksPerRev";
-            this.txtTicksPerRev.Size = new System.Drawing.Size(93, 22);
-            this.txtTicksPerRev.TabIndex = 4;
-            this.txtTicksPerRev.Leave += new System.EventHandler(this.txtTicksPerRev_Leave);
-            // 
-            // txtParkPos
-            // 
-            this.txtParkPos.Location = new System.Drawing.Point(203, 63);
-            this.txtParkPos.Margin = new System.Windows.Forms.Padding(4);
-            this.txtParkPos.Name = "txtParkPos";
-            this.txtParkPos.Size = new System.Drawing.Size(93, 22);
-            this.txtParkPos.TabIndex = 3;
-            this.txtParkPos.Leave += new System.EventHandler(this.txtParkPos_Leave);
-            // 
-            // cmdTest
-            // 
-            this.cmdTest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.cmdTest.Location = new System.Drawing.Point(103, 643);
-            this.cmdTest.Margin = new System.Windows.Forms.Padding(4);
-            this.cmdTest.Name = "cmdTest";
-            this.cmdTest.Size = new System.Drawing.Size(79, 30);
-            this.cmdTest.TabIndex = 59;
-            this.cmdTest.Text = "&Test Link";
-            this.cmdTest.UseVisualStyleBackColor = true;
-            this.cmdTest.Click += new System.EventHandler(this.CmdTest_Click);
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.btnPark);
-            this.groupBox1.Controls.Add(this.btnHome);
-            this.groupBox1.Controls.Add(this.btnCCW);
-            this.groupBox1.Controls.Add(this.btnCW);
-            this.groupBox1.Location = new System.Drawing.Point(16, 413);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(383, 111);
-            this.groupBox1.TabIndex = 60;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Controls";
-            // 
-            // btnPark
-            // 
-            this.btnPark.Image = ((System.Drawing.Image)(resources.GetObject("btnPark.Image")));
-            this.btnPark.Location = new System.Drawing.Point(197, 23);
-            this.btnPark.Margin = new System.Windows.Forms.Padding(4);
-            this.btnPark.Name = "btnPark";
-            this.btnPark.Size = new System.Drawing.Size(87, 80);
-            this.btnPark.TabIndex = 3;
-            this.toolTip1.SetToolTip(this.btnPark, "Send Dome to the Park Position");
-            this.btnPark.UseVisualStyleBackColor = true;
-            this.btnPark.Click += new System.EventHandler(this.BtnPark_Click);
-            // 
-            // btnHome
-            // 
-            this.btnHome.Image = ((System.Drawing.Image)(resources.GetObject("btnHome.Image")));
-            this.btnHome.Location = new System.Drawing.Point(103, 23);
-            this.btnHome.Margin = new System.Windows.Forms.Padding(4);
-            this.btnHome.Name = "btnHome";
-            this.btnHome.Size = new System.Drawing.Size(87, 80);
-            this.btnHome.TabIndex = 2;
-            this.toolTip1.SetToolTip(this.btnHome, "Send Dome to the Home (sensor) Position");
-            this.btnHome.UseVisualStyleBackColor = true;
-            this.btnHome.Click += new System.EventHandler(this.BtnHome_Click);
-            // 
-            // btnCCW
-            // 
-            this.btnCCW.Image = ((System.Drawing.Image)(resources.GetObject("btnCCW.Image")));
-            this.btnCCW.Location = new System.Drawing.Point(8, 23);
-            this.btnCCW.Margin = new System.Windows.Forms.Padding(4);
-            this.btnCCW.Name = "btnCCW";
-            this.btnCCW.Size = new System.Drawing.Size(87, 80);
-            this.btnCCW.TabIndex = 1;
-            this.toolTip1.SetToolTip(this.btnCCW, "Rotate Dome Counter Clockwise");
-            this.btnCCW.UseVisualStyleBackColor = true;
-            this.btnCCW.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BtnCCW_MouseDown);
-            this.btnCCW.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BtnCCW_MouseUp);
-            // 
-            // btnCW
-            // 
-            this.btnCW.Image = ((System.Drawing.Image)(resources.GetObject("btnCW.Image")));
-            this.btnCW.Location = new System.Drawing.Point(292, 23);
-            this.btnCW.Margin = new System.Windows.Forms.Padding(4);
-            this.btnCW.Name = "btnCW";
-            this.btnCW.Size = new System.Drawing.Size(81, 80);
-            this.btnCW.TabIndex = 0;
-            this.toolTip1.SetToolTip(this.btnCW, "Rotate Dome Clockwise");
-            this.btnCW.UseVisualStyleBackColor = true;
-            this.btnCW.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BtnCW_MouseDown);
-            this.btnCW.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BtnCW_MouseUp);
-            // 
-            // txtAzimuth
-            // 
-            this.txtAzimuth.Enabled = false;
-            this.txtAzimuth.Location = new System.Drawing.Point(151, 533);
-            this.txtAzimuth.Margin = new System.Windows.Forms.Padding(4);
-            this.txtAzimuth.Name = "txtAzimuth";
-            this.txtAzimuth.Size = new System.Drawing.Size(132, 22);
-            this.txtAzimuth.TabIndex = 62;
-            // 
-            // btnGetAzimuth
-            // 
-            this.btnGetAzimuth.Location = new System.Drawing.Point(16, 531);
-            this.btnGetAzimuth.Margin = new System.Windows.Forms.Padding(4);
-            this.btnGetAzimuth.Name = "btnGetAzimuth";
-            this.btnGetAzimuth.Size = new System.Drawing.Size(115, 28);
-            this.btnGetAzimuth.TabIndex = 63;
-            this.btnGetAzimuth.Text = "Get Azimuth";
-            this.btnGetAzimuth.UseVisualStyleBackColor = true;
-            this.btnGetAzimuth.Click += new System.EventHandler(this.btnGetAzimuth_Click);
-            // 
-            // btnSetAzimuth
-            // 
-            this.btnSetAzimuth.Location = new System.Drawing.Point(16, 565);
-            this.btnSetAzimuth.Margin = new System.Windows.Forms.Padding(4);
-            this.btnSetAzimuth.Name = "btnSetAzimuth";
-            this.btnSetAzimuth.Size = new System.Drawing.Size(115, 28);
-            this.btnSetAzimuth.TabIndex = 4;
-            this.btnSetAzimuth.Text = "Set Azimuth";
-            this.btnSetAzimuth.UseVisualStyleBackColor = true;
-            this.btnSetAzimuth.Click += new System.EventHandler(this.btnSetAzimuth_Click);
-            // 
-            // txtSetAzimuth
-            // 
-            this.txtSetAzimuth.Location = new System.Drawing.Point(151, 568);
-            this.txtSetAzimuth.Margin = new System.Windows.Forms.Padding(4);
-            this.txtSetAzimuth.Name = "txtSetAzimuth";
-            this.txtSetAzimuth.Size = new System.Drawing.Size(132, 22);
-            this.txtSetAzimuth.TabIndex = 3;
-            // 
-            // btnAbortSlew
-            // 
-            this.btnAbortSlew.Location = new System.Drawing.Point(299, 602);
-            this.btnAbortSlew.Margin = new System.Windows.Forms.Padding(4);
-            this.btnAbortSlew.Name = "btnAbortSlew";
-            this.btnAbortSlew.Size = new System.Drawing.Size(100, 28);
-            this.btnAbortSlew.TabIndex = 2;
-            this.btnAbortSlew.Text = "Abort Slew";
-            this.btnAbortSlew.UseVisualStyleBackColor = true;
-            this.btnAbortSlew.Click += new System.EventHandler(this.btnSlewToTargetCCW_Click);
-            // 
-            // btnSlewToTarget
-            // 
-            this.btnSlewToTarget.Location = new System.Drawing.Point(16, 601);
-            this.btnSlewToTarget.Margin = new System.Windows.Forms.Padding(4);
-            this.btnSlewToTarget.Name = "btnSlewToTarget";
-            this.btnSlewToTarget.Size = new System.Drawing.Size(115, 30);
-            this.btnSlewToTarget.TabIndex = 1;
-            this.btnSlewToTarget.Text = "Slew to Target";
-            this.btnSlewToTarget.UseVisualStyleBackColor = true;
-            this.btnSlewToTarget.Click += new System.EventHandler(this.btnSlewToTargetCW_Click);
-            // 
-            // txtTargetAzimuth
-            // 
-            this.txtTargetAzimuth.Location = new System.Drawing.Point(151, 605);
-            this.txtTargetAzimuth.Margin = new System.Windows.Forms.Padding(4);
-            this.txtTargetAzimuth.Name = "txtTargetAzimuth";
-            this.txtTargetAzimuth.Size = new System.Drawing.Size(132, 22);
-            this.txtTargetAzimuth.TabIndex = 0;
             // 
             // numUDLoggingLevel
             // 
             this.numUDLoggingLevel.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::ASCOM.MattsDome.Properties.Settings.Default, "LogLevel", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.numUDLoggingLevel.Location = new System.Drawing.Point(11, 219);
+            this.numUDLoggingLevel.Location = new System.Drawing.Point(8, 178);
+            this.numUDLoggingLevel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.numUDLoggingLevel.Maximum = new decimal(new int[] {
             2,
             0,
@@ -423,7 +174,7 @@ namespace ASCOM.MattsDome
             0,
             0});
             this.numUDLoggingLevel.Name = "numUDLoggingLevel";
-            this.numUDLoggingLevel.Size = new System.Drawing.Size(38, 22);
+            this.numUDLoggingLevel.Size = new System.Drawing.Size(28, 20);
             this.numUDLoggingLevel.TabIndex = 18;
             this.numUDLoggingLevel.Value = global::ASCOM.MattsDome.Properties.Settings.Default.LogLevel;
             // 
@@ -433,20 +184,238 @@ namespace ASCOM.MattsDome
             this.chkLCDBacklight.Checked = global::ASCOM.MattsDome.Properties.Settings.Default.EnableLCDBacklight;
             this.chkLCDBacklight.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkLCDBacklight.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::ASCOM.MattsDome.Properties.Settings.Default, "EnableLCDBacklight", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkLCDBacklight.Location = new System.Drawing.Point(12, 248);
-            this.chkLCDBacklight.Margin = new System.Windows.Forms.Padding(4);
+            this.chkLCDBacklight.Location = new System.Drawing.Point(9, 202);
             this.chkLCDBacklight.Name = "chkLCDBacklight";
-            this.chkLCDBacklight.Size = new System.Drawing.Size(166, 21);
+            this.chkLCDBacklight.Size = new System.Drawing.Size(130, 17);
             this.chkLCDBacklight.TabIndex = 17;
             this.chkLCDBacklight.Text = "Enable LCD Backlight";
             this.chkLCDBacklight.UseVisualStyleBackColor = true;
             this.chkLCDBacklight.CheckedChanged += new System.EventHandler(this.chkLCDBacklight_CheckedChanged);
             // 
+            // chkLogToFile
+            // 
+            this.chkLogToFile.AutoSize = true;
+            this.chkLogToFile.Location = new System.Drawing.Point(9, 156);
+            this.chkLogToFile.Name = "chkLogToFile";
+            this.chkLogToFile.Size = new System.Drawing.Size(79, 17);
+            this.chkLogToFile.TabIndex = 16;
+            this.chkLogToFile.Text = "Log To File";
+            this.chkLogToFile.UseVisualStyleBackColor = true;
+            // 
+            // chkLoggingWindow
+            // 
+            this.chkLoggingWindow.AutoSize = true;
+            this.chkLoggingWindow.Location = new System.Drawing.Point(9, 133);
+            this.chkLoggingWindow.Name = "chkLoggingWindow";
+            this.chkLoggingWindow.Size = new System.Drawing.Size(142, 17);
+            this.chkLoggingWindow.TabIndex = 15;
+            this.chkLoggingWindow.Text = "Enable Logging Window";
+            this.chkLoggingWindow.UseVisualStyleBackColor = true;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(6, 28);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(111, 13);
+            this.label7.TabIndex = 13;
+            this.label7.Text = "Home Sensor Position";
+            // 
+            // txtHomeSensorPos
+            // 
+            this.txtHomeSensorPos.Location = new System.Drawing.Point(152, 25);
+            this.txtHomeSensorPos.Name = "txtHomeSensorPos";
+            this.txtHomeSensorPos.Size = new System.Drawing.Size(71, 20);
+            this.txtHomeSensorPos.TabIndex = 12;
+            this.txtHomeSensorPos.Leave += new System.EventHandler(this.txtHomeSensorPos_Leave);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 53);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(69, 13);
+            this.label6.TabIndex = 11;
+            this.label6.Text = "Park Position";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 80);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(136, 13);
+            this.label5.TabIndex = 10;
+            this.label5.Text = "Ticks per Dome Revolution";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 106);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(126, 13);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Find Home timeout (secs)";
+            // 
+            // txtFindHomeTimeout
+            // 
+            this.txtFindHomeTimeout.Location = new System.Drawing.Point(152, 103);
+            this.txtFindHomeTimeout.Name = "txtFindHomeTimeout";
+            this.txtFindHomeTimeout.Size = new System.Drawing.Size(71, 20);
+            this.txtFindHomeTimeout.TabIndex = 5;
+            // 
+            // txtTicksPerRev
+            // 
+            this.txtTicksPerRev.Location = new System.Drawing.Point(152, 77);
+            this.txtTicksPerRev.Name = "txtTicksPerRev";
+            this.txtTicksPerRev.Size = new System.Drawing.Size(71, 20);
+            this.txtTicksPerRev.TabIndex = 4;
+            this.txtTicksPerRev.Leave += new System.EventHandler(this.txtTicksPerRev_Leave);
+            // 
+            // txtParkPos
+            // 
+            this.txtParkPos.Location = new System.Drawing.Point(152, 51);
+            this.txtParkPos.Name = "txtParkPos";
+            this.txtParkPos.Size = new System.Drawing.Size(71, 20);
+            this.txtParkPos.TabIndex = 3;
+            this.txtParkPos.Leave += new System.EventHandler(this.txtParkPos_Leave);
+            // 
+            // cmdTest
+            // 
+            this.cmdTest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.cmdTest.Location = new System.Drawing.Point(77, 522);
+            this.cmdTest.Name = "cmdTest";
+            this.cmdTest.Size = new System.Drawing.Size(59, 24);
+            this.cmdTest.TabIndex = 59;
+            this.cmdTest.Text = "&Test Link";
+            this.cmdTest.UseVisualStyleBackColor = true;
+            this.cmdTest.Click += new System.EventHandler(this.CmdTest_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.btnPark);
+            this.groupBox1.Controls.Add(this.btnHome);
+            this.groupBox1.Controls.Add(this.btnCCW);
+            this.groupBox1.Controls.Add(this.btnCW);
+            this.groupBox1.Location = new System.Drawing.Point(12, 336);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(287, 90);
+            this.groupBox1.TabIndex = 60;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Controls";
+            // 
+            // btnPark
+            // 
+            this.btnPark.Image = ((System.Drawing.Image)(resources.GetObject("btnPark.Image")));
+            this.btnPark.Location = new System.Drawing.Point(148, 19);
+            this.btnPark.Name = "btnPark";
+            this.btnPark.Size = new System.Drawing.Size(65, 65);
+            this.btnPark.TabIndex = 3;
+            this.toolTip1.SetToolTip(this.btnPark, "Send Dome to the Park Position");
+            this.btnPark.UseVisualStyleBackColor = true;
+            this.btnPark.Click += new System.EventHandler(this.BtnPark_Click);
+            // 
+            // btnHome
+            // 
+            this.btnHome.Image = ((System.Drawing.Image)(resources.GetObject("btnHome.Image")));
+            this.btnHome.Location = new System.Drawing.Point(77, 19);
+            this.btnHome.Name = "btnHome";
+            this.btnHome.Size = new System.Drawing.Size(65, 65);
+            this.btnHome.TabIndex = 2;
+            this.toolTip1.SetToolTip(this.btnHome, "Send Dome to the Home (sensor) Position");
+            this.btnHome.UseVisualStyleBackColor = true;
+            this.btnHome.Click += new System.EventHandler(this.BtnHome_Click);
+            // 
+            // btnCCW
+            // 
+            this.btnCCW.Image = ((System.Drawing.Image)(resources.GetObject("btnCCW.Image")));
+            this.btnCCW.Location = new System.Drawing.Point(6, 19);
+            this.btnCCW.Name = "btnCCW";
+            this.btnCCW.Size = new System.Drawing.Size(65, 65);
+            this.btnCCW.TabIndex = 1;
+            this.toolTip1.SetToolTip(this.btnCCW, "Rotate Dome Counter Clockwise");
+            this.btnCCW.UseVisualStyleBackColor = true;
+            this.btnCCW.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BtnCCW_MouseDown);
+            this.btnCCW.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BtnCCW_MouseUp);
+            // 
+            // btnCW
+            // 
+            this.btnCW.Image = ((System.Drawing.Image)(resources.GetObject("btnCW.Image")));
+            this.btnCW.Location = new System.Drawing.Point(219, 19);
+            this.btnCW.Name = "btnCW";
+            this.btnCW.Size = new System.Drawing.Size(61, 65);
+            this.btnCW.TabIndex = 0;
+            this.toolTip1.SetToolTip(this.btnCW, "Rotate Dome Clockwise");
+            this.btnCW.UseVisualStyleBackColor = true;
+            this.btnCW.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BtnCW_MouseDown);
+            this.btnCW.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BtnCW_MouseUp);
+            // 
+            // txtAzimuth
+            // 
+            this.txtAzimuth.Enabled = false;
+            this.txtAzimuth.Location = new System.Drawing.Point(113, 433);
+            this.txtAzimuth.Name = "txtAzimuth";
+            this.txtAzimuth.Size = new System.Drawing.Size(100, 20);
+            this.txtAzimuth.TabIndex = 62;
+            // 
+            // btnGetAzimuth
+            // 
+            this.btnGetAzimuth.Location = new System.Drawing.Point(12, 431);
+            this.btnGetAzimuth.Name = "btnGetAzimuth";
+            this.btnGetAzimuth.Size = new System.Drawing.Size(86, 23);
+            this.btnGetAzimuth.TabIndex = 63;
+            this.btnGetAzimuth.Text = "Get Azimuth";
+            this.btnGetAzimuth.UseVisualStyleBackColor = true;
+            this.btnGetAzimuth.Click += new System.EventHandler(this.btnGetAzimuth_Click);
+            // 
+            // btnSetAzimuth
+            // 
+            this.btnSetAzimuth.Location = new System.Drawing.Point(12, 459);
+            this.btnSetAzimuth.Name = "btnSetAzimuth";
+            this.btnSetAzimuth.Size = new System.Drawing.Size(86, 23);
+            this.btnSetAzimuth.TabIndex = 4;
+            this.btnSetAzimuth.Text = "Set Azimuth";
+            this.btnSetAzimuth.UseVisualStyleBackColor = true;
+            this.btnSetAzimuth.Click += new System.EventHandler(this.btnSetAzimuth_Click);
+            // 
+            // txtSetAzimuth
+            // 
+            this.txtSetAzimuth.Location = new System.Drawing.Point(113, 462);
+            this.txtSetAzimuth.Name = "txtSetAzimuth";
+            this.txtSetAzimuth.Size = new System.Drawing.Size(100, 20);
+            this.txtSetAzimuth.TabIndex = 3;
+            // 
+            // btnAbortSlew
+            // 
+            this.btnAbortSlew.Location = new System.Drawing.Point(224, 489);
+            this.btnAbortSlew.Name = "btnAbortSlew";
+            this.btnAbortSlew.Size = new System.Drawing.Size(75, 23);
+            this.btnAbortSlew.TabIndex = 2;
+            this.btnAbortSlew.Text = "Abort Slew";
+            this.btnAbortSlew.UseVisualStyleBackColor = true;
+            this.btnAbortSlew.Click += new System.EventHandler(this.btnSlewToTargetCCW_Click);
+            // 
+            // btnSlewToTarget
+            // 
+            this.btnSlewToTarget.Location = new System.Drawing.Point(12, 488);
+            this.btnSlewToTarget.Name = "btnSlewToTarget";
+            this.btnSlewToTarget.Size = new System.Drawing.Size(86, 24);
+            this.btnSlewToTarget.TabIndex = 1;
+            this.btnSlewToTarget.Text = "Slew to Target";
+            this.btnSlewToTarget.UseVisualStyleBackColor = true;
+            this.btnSlewToTarget.Click += new System.EventHandler(this.btnSlewToTargetCW_Click);
+            // 
+            // txtTargetAzimuth
+            // 
+            this.txtTargetAzimuth.Location = new System.Drawing.Point(113, 492);
+            this.txtTargetAzimuth.Name = "txtTargetAzimuth";
+            this.txtTargetAzimuth.Size = new System.Drawing.Size(100, 20);
+            this.txtTargetAzimuth.TabIndex = 0;
+            // 
             // SetupDialogForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(415, 687);
+            this.ClientSize = new System.Drawing.Size(311, 558);
             this.Controls.Add(this.btnAbortSlew);
             this.Controls.Add(this.txtSetAzimuth);
             this.Controls.Add(this.txtTargetAzimuth);
@@ -462,19 +431,18 @@ namespace ASCOM.MattsDome
             this.Controls.Add(this.cmdCancel);
             this.Controls.Add(this.cmdOK);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SetupDialogForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "MattsDome Setup v0.5.0";
+            this.Text = "MattsDome Setup v0.6.0";
             ((System.ComponentModel.ISupportInitialize)(this.picASCOM)).EndInit();
             this.frmComm.ResumeLayout(false);
             this.GroupBox2.ResumeLayout(false);
             this.GroupBox2.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numUDLoggingLevel)).EndInit();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

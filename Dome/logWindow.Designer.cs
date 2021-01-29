@@ -50,7 +50,7 @@
             this.ClientSize = new System.Drawing.Size(571, 414);
             this.Controls.Add(this.txtLogWindow);
             this.Name = "logWindow";
-            this.Text = "logWindow";
+            this.Text = "logWindow - Matt\'s Dome Driver - v0.6.0";
             this.ResumeLayout(false);
             this.PerformLayout();
 
