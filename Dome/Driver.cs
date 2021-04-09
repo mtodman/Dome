@@ -932,7 +932,7 @@ namespace ASCOM.MattsDome
                 }
                 else
                 {
-                    WriteToLog(DateTime.Now.ToString() + ": Atduino >> Driver: OK (33) signal recieved: " + response.ToString(), 2);
+                    WriteToLog(DateTime.Now.ToString() + ": Arduino >> Driver: OK (33) signal recieved: " + response.ToString(), 2);
                 }
             }
         }
