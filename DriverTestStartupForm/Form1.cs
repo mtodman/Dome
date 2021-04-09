@@ -71,5 +71,10 @@ namespace ASCOM.DriverStartupTestForm
         {
             driver.SlewToAzimuth(Convert.ToDouble(txtGotoAz.Text));
         }
+
+        private void btnFindHome_Click(object sender, EventArgs e)
+        {
+            driver.FindHome();
+        }
     }
 }

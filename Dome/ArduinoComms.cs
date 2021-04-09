@@ -45,8 +45,8 @@ namespace ASCOM.MattsDome
             if (!_serialPort.IsOpen)
             {
                 _serialPort.PortName = _portName;
-                _serialPort.ReadTimeout = 2000;
-                _serialPort.WriteTimeout = 2000;
+                _serialPort.ReadTimeout = 5000;
+                _serialPort.WriteTimeout = 5000;
                 _serialPort.Open();
             }
             int response;
@@ -66,7 +66,7 @@ namespace ASCOM.MattsDome
             catch (System.TimeoutException ex)
             {
                 _serialPort.Close();
-                return 254;
+                return 9999;
                 //throw new TimeoutException(ex.Message);
             }
             _serialPort.Close();

@@ -39,6 +39,7 @@ using ASCOM.DeviceInterface;
 using System.Globalization;
 using System.Collections;
 using System.Threading;
+using System.Threading.Tasks;
 
 
 namespace ASCOM.MattsDome
@@ -332,7 +333,7 @@ namespace ASCOM.MattsDome
                 else
                 {
                     isConnected = false;
-                    if (log_window_enabled) //Let's close the logwindow form
+                    if (log_window_enabled) 
                     {
                         oThread.Abort();
                         L.Invoke(new CloseDelegate(L.Close)); //Required because we are closing the logwindow form from another thread
@@ -747,6 +748,10 @@ namespace ASCOM.MattsDome
 
         public void FindHome()
         {
+            FindDomeHome();
+        }
+        public async Task FindDomeHome()
+        {
             WriteToLog(DateTime.Now.ToString() + ": Application >> Driver: FindHome", 2);
             if (Slaved) throw new ASCOM.SlavedException();
             int response = serial_port.SendCommand(ARD_FIND_HOME, 0);
@@ -764,21 +769,26 @@ namespace ASCOM.MattsDome
                 //perform a periodic check to see if the Arduino is in the home position
                 DateTime starttime = DateTime.Now;
                 DateTime endtime = starttime.AddSeconds((double)Properties.Settings.Default.FindHomeTimeout);
-                while (DateTime.Now < endtime)
+                await Task.Run(() =>
                 {
-                    if (AtHome == true)
+                    while (DateTime.Now < endtime)
                     {
-                        WriteToLog(DateTime.Now.ToString() + ": The dome is now homed", 2);
-                        azimuth = Properties.Settings.Default.HomeSensorPosition;
-                        //TODO
-                        ////////////Need to Sync Azimuth here
-                        return;
+                        if (AtHome == true)
+                        {
+                            WriteToLog(DateTime.Now.ToString() + ": The dome is now homed", 2);
+                            azimuth = Properties.Settings.Default.HomeSensorPosition;
+                            //TODO
+                            ////////////Need to Sync Azimuth here
+                            return;
+                        }
+                        else System.Threading.Thread.Sleep(2000);
                     }
-                    else System.Threading.Thread.Sleep(2000);
+                    // Home Position not found within timeout period
+                    WriteToLog(DateTime.Now.ToString() + ": Home Position not found within timeout period", 2);
+                    throw new ASCOM.DriverException("Home Position not found within timeout period");
                 }
-                // Home Position not found within timeout period
-                WriteToLog(DateTime.Now.ToString() + ": Home Position not found within timeout period", 2);
-                throw new ASCOM.DriverException("Home Position not found within timeout period");
+                );
+                
             }
         }
 

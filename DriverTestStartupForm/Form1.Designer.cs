@@ -37,6 +37,7 @@
             this.txtGetAz = new System.Windows.Forms.TextBox();
             this.txtSetAz = new System.Windows.Forms.TextBox();
             this.txtGotoAz = new System.Windows.Forms.TextBox();
+            this.btnFindHome = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonChoose
@@ -122,11 +123,22 @@
             this.txtGotoAz.Size = new System.Drawing.Size(100, 20);
             this.txtGotoAz.TabIndex = 8;
             // 
+            // btnFindHome
+            // 
+            this.btnFindHome.Location = new System.Drawing.Point(12, 179);
+            this.btnFindHome.Name = "btnFindHome";
+            this.btnFindHome.Size = new System.Drawing.Size(75, 23);
+            this.btnFindHome.TabIndex = 9;
+            this.btnFindHome.Text = "Find Home";
+            this.btnFindHome.UseVisualStyleBackColor = true;
+            this.btnFindHome.Click += new System.EventHandler(this.btnFindHome_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(409, 262);
+            this.ClientSize = new System.Drawing.Size(409, 435);
+            this.Controls.Add(this.btnFindHome);
             this.Controls.Add(this.txtGotoAz);
             this.Controls.Add(this.txtSetAz);
             this.Controls.Add(this.txtGetAz);
@@ -155,6 +167,7 @@
         private System.Windows.Forms.TextBox txtGetAz;
         private System.Windows.Forms.TextBox txtSetAz;
         private System.Windows.Forms.TextBox txtGotoAz;
+        private System.Windows.Forms.Button btnFindHome;
     }
 }
 
